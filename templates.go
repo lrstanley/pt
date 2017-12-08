@@ -135,6 +135,7 @@ func (ld *Loader) Render(w http.ResponseWriter, r *http.Request, path string, rc
 		ctx["cachets"] = ld.ts.Unix()
 	}
 
+	w.Header().Set("Content-Type", "text/html")
 	if err := tpl.ExecuteWriter(ctx, w); err != nil {
 		if _, ok := err.(*pongo2.Error); ok {
 			panic(err)
