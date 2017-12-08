@@ -1,0 +1,10 @@
+~*
+*.tmp
+*.txt
+*.export
+rice-box*
+*.test
+*.prof
+vendor/*
+!vendor/*.json
+*.lock
