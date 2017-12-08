@@ -94,9 +94,9 @@ func (ld *Loader) Render(w http.ResponseWriter, r *http.Request, path string, rc
 	var err error
 
 	if ld.conf.CacheParsed {
-		atmpl, err = ld.fs.FromFile(path)
-	} else {
 		atmpl, err = ld.fs.FromCache(path)
+	} else {
+		atmpl, err = ld.fs.FromFile(path)
 	}
 
 	if orig, ok := err.(*pongo2.Error); ok {
