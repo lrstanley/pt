@@ -1,6 +1,6 @@
-# pongotmpl [![godoc](https://godoc.org/github.com/lrstanley/pongotmpl?status.png)](https://godoc.org/github.com/lrstanley/pongotmpl) [![goreport](https://goreportcard.com/badge/github.com/lrstanley/pongotmpl)](https://goreportcard.com/report/github.com/lrstanley/pongotmpl)
+# pt [![godoc](https://godoc.org/github.com/lrstanley/pt?status.png)](https://godoc.org/github.com/lrstanley/pt) [![goreport](https://goreportcard.com/badge/github.com/lrstanley/pt)](https://goreportcard.com/report/github.com/lrstanley/pt)
 
-pongotmpl are simple helpers for those using `pongo2`/`ricebox` + in-memory
+pt is a small package with simple helpers for those using `pongo2`/`ricebox` + in-memory
 template loaders together.
 
 ## License
