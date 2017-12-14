@@ -16,6 +16,10 @@ import (
 	"github.com/flosch/pongo2"
 )
 
+// M is a convenience alias for quickly building a map structure that is going
+// out to a responder. Just a short-hand.
+type M map[string]interface{}
+
 // New returns a new loader with initialized template sets and configuration.
 func New(set string, conf Config) *Loader {
 	if conf.Loader == nil {
