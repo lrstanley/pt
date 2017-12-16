@@ -5,11 +5,14 @@
 package pt
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -177,4 +180,34 @@ func FileServer(router Router, path string, root http.FileSystem) {
 	router.Get(path, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fs.ServeHTTP(w, r)
 	}))
+}
+
+// JSONEscapeHTMLKey is a context key which can be used with JSON() to set
+// HTML escaping to true.
+const JSONEscapeHTMLKey = "JSONEscapeHTML"
+
+// JSON marshals 'v' to JSON, and setting the Content-Type as application/json.
+// Note that this does NOT auto-escape HTML. If you would like to escape HTML,
+// set the JSONEscapeHTMLKey context value to true.
+//
+// JSON also supports prettification when the origin request has "?pretty=true"
+// or similar.
+func JSON(w http.ResponseWriter, r *http.Request, v interface{}) {
+	buf := &bytes.Buffer{}
+	enc := json.NewEncoder(buf)
+
+	if escape, ok := r.Context().Value(JSONEscapeHTMLKey).(bool); ok && escape {
+		enc.SetEscapeHTML(escape)
+	}
+
+	if pretty, _ := strconv.ParseBool(r.FormValue("pretty")); pretty {
+		enc.SetIndent("", "    ")
+	}
+
+	if err := enc.Encode(v); err != nil {
+		panic(err)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	_, _ = w.Write(buf.Bytes())
 }
