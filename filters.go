@@ -9,14 +9,14 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/flosch/pongo2"
+	"github.com/flosch/pongo2/v5"
 )
 
 func init() {
 	pongo2.RegisterFilter("json", filterJSON)
 }
 
-func filterJSON(in *pongo2.Value, param *pongo2.Value) (*pongo2.Value, *pongo2.Error) {
+func filterJSON(in, param *pongo2.Value) (*pongo2.Value, *pongo2.Error) {
 	var b bytes.Buffer
 	enc := json.NewEncoder(&b)
 

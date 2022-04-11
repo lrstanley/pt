@@ -9,14 +9,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
+	"io/fs"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/flosch/pongo2"
+	"github.com/flosch/pongo2/v5"
 )
 
 // M is a convenience alias for quickly building a map structure that is going
@@ -25,16 +25,23 @@ type M map[string]interface{}
 
 // New returns a new loader with initialized template sets and configuration.
 func New(set string, conf Config) *Loader {
-	if conf.Loader == nil {
+	if conf.Loader == nil && conf.FS == nil {
 		panic("no loader provided")
 	}
 
 	if conf.ErrorLogger == nil {
-		conf.ErrorLogger = ioutil.Discard
+		conf.ErrorLogger = io.Discard
+	}
+
+	var fileServer pongo2.TemplateLoader
+	if conf.Loader != nil {
+		fileServer = &memLoader{loaderFunc: conf.Loader}
+	} else {
+		fileServer = pongo2.NewFSLoader(conf.FS)
 	}
 
 	ld := &Loader{
-		fs: pongo2.NewSet(set, &memLoader{loaderFunc: conf.Loader}),
+		fs: pongo2.NewSet(set, fileServer),
 		ts: time.Now(), conf: &conf,
 	}
 
@@ -55,6 +62,7 @@ type Config struct {
 	// For example:
 	//   rice.MustFindBox("static").Bytes
 	Loader func(path string) ([]byte, error)
+	FS     fs.FS
 	// DefaultCtx is an optional function which you can supply, which is
 	// called every time the Render() function is called, which allows you
 	// to add additional context variables to the ctx map. Useful if you are
@@ -125,11 +133,12 @@ func (ld *Loader) Render(w http.ResponseWriter, r *http.Request, path string, rc
 		ctx = ld.conf.DefaultCtx(w, r)
 	}
 
-	if ctx == nil && rctx != nil {
+	switch {
+	case ctx == nil && rctx != nil:
 		ctx = rctx
-	} else if ctx == nil {
+	case ctx == nil:
 		ctx = make(map[string]interface{})
-	} else if rctx != nil {
+	case rctx != nil:
 		for key := range rctx {
 			ctx[key] = rctx[key]
 		}
@@ -169,7 +178,7 @@ func FileServer(router Router, path string, root http.FileSystem) {
 		panic("url params not allowed in file server")
 	}
 
-	fs := http.StripPrefix(path, http.FileServer(root))
+	srv := http.StripPrefix(path, http.FileServer(root))
 
 	if path != "/" && path[len(path)-1] != '/' {
 		router.Get(path, http.RedirectHandler(path+"/", 301).ServeHTTP)
@@ -178,7 +187,7 @@ func FileServer(router Router, path string, root http.FileSystem) {
 	path += "*"
 
 	router.Get(path, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fs.ServeHTTP(w, r)
+		srv.ServeHTTP(w, r)
 	}))
 }
 
