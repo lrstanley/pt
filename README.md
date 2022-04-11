@@ -1,6 +1,6 @@
 <!-- template:begin:header -->
 <!-- do not edit anything in this "template" block, its auto-generated -->
-<p align="center">pt -- pt is a helper package for using pongo2/ricebox + in-memory tmpl loaders together.</p>
+<p align="center">pt -- pt is a helper package for using pongo2 & in-memory tmpl loaders together.</p>
 <p align="center">
   <a href="https://github.com/lrstanley/pt/tags">
     <img title="Latest Semver Tag" src="https://img.shields.io/github/v/tag/lrstanley/pt?style=flat-square">
