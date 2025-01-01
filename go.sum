@@ -1,5 +1,5 @@
-github.com/flosch/pongo2/v5 v5.0.0 h1:ZauMp+iPZzh2aI1QM2UwRb0lXD4BoFcvBuWqefkIuq0=
-github.com/flosch/pongo2/v5 v5.0.0/go.mod h1:6ysKu++8ANFXmc3x6uA6iVaS+PKUoDfdX3yPcv8TIzY=
+github.com/flosch/pongo2/v6 v6.0.0 h1:lsGru8IAzHgIAw6H2m4PCyleO58I40ow6apih0WprMU=
+github.com/flosch/pongo2/v6 v6.0.0/go.mod h1:CuDpFm47R0uGGE7z13/tTlt1Y6zdxvr2RLT5LJhsHEU=
 github.com/kr/pretty v0.2.1 h1:Fmg33tUaq4/8ym9TJN1x7sLJnHVwhP33CNkpYV/7rwI=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=

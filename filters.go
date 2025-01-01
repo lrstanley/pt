@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/flosch/pongo2/v5"
+	"github.com/flosch/pongo2/v6"
 )
 
 func init() {
