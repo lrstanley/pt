@@ -16,7 +16,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/flosch/pongo2/v5"
+	"github.com/flosch/pongo2/v6"
 )
 
 // M is a convenience alias for quickly building a map structure that is going
@@ -94,16 +94,16 @@ type Loader struct {
 // just use "{{ yourvar }}"). In addition to this, there are a few predefined
 // ctx keys:
 //
-//   url     -> request.URL
-//   cachets -> The timestamp of when the loader was defined. This is useful
-//              to append at the end of your css/js/etc as a way of allowing
-//              the browser to not use the same cache after the application
-//              has been recompiled/restarted.
+//	url     -> request.URL
+//	cachets -> The timestamp of when the loader was defined. This is useful
+//	           to append at the end of your css/js/etc as a way of allowing
+//	           the browser to not use the same cache after the application
+//	           has been recompiled/restarted.
 //
 // ctx keys can be overridden. The priority is:
-//   1. Context defined via Render().
-//   2. Context defined via the default context function.
-//   3. Default defined context by the package, mentioned above.
+//  1. Context defined via Render().
+//  2. Context defined via the default context function.
+//  3. Default defined context by the package, mentioned above.
 func (ld *Loader) Render(w http.ResponseWriter, r *http.Request, path string, rctx map[string]interface{}) {
 	var atmpl *pongo2.Template
 	var err error
@@ -172,7 +172,8 @@ type Router interface {
 // router which has a Get() method (e.g. go-chi/chi.Router).
 //
 // For example, mixing go-chi/chi + go-ricebox:
-//   FileServer(r, "/static", rice.MustFindBox("static").HTTPBox())
+//
+//	FileServer(r, "/static", rice.MustFindBox("static").HTTPBox())
 func FileServer(router Router, path string, root http.FileSystem) {
 	if strings.ContainsAny(path, "{}*") {
 		panic("url params not allowed in file server")
