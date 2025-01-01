@@ -1,5 +1,5 @@
-// Copyright (c) Liam Stanley <me@liamstanley.io>. All rights reserved. Use
-// of this source code is governed by the MIT license that can be found in
+// Copyright (c) Liam Stanley <liam@liam.sh>. All rights reserved. Use of
+// this source code is governed by the MIT license that can be found in
 // the LICENSE file.
 
 package pt
@@ -24,14 +24,15 @@ var NextKey = "next"
 // redirect to after doing some task (e.g. authenticating).
 //
 // For example:
+//
 //	if isAuthed(r) {
 //		if next := pt.GetNextURL(r); next != "" {
 //			pt.RedirectToNextURL(w, r, http.StatusFound)
-// 			return
+//			return
 //		}
 //
-// 		http.Redirect(w, r, "/some/home/page", http.StatusFound)
-// 		return
+//		http.Redirect(w, r, "/some/home/page", http.StatusFound)
+//		return
 //	}
 func GetNextURL(r *http.Request) (next string) {
 	_ = r.ParseForm()
@@ -64,6 +65,7 @@ func GetNextURL(r *http.Request) (next string) {
 // the http code used when redirecting.
 //
 // Example:
+//
 //	if !auth(user, passwd) {
 //		pt.RedirectWithNextURL(w, r, r.URL.EscapedPath(), http.StatusTemporaryRedirect)
 //		return
@@ -76,6 +78,7 @@ func RedirectWithNextURL(w http.ResponseWriter, r *http.Request, target string, 
 // parameter. Do this after the task (e.g. after authenticating).
 //
 // Example:
+//
 //	if auth(user, passwd) {
 //		pt.RedirectToNextURL(w, r, http.StatusTemporaryRedirect)
 //		return

@@ -1,5 +1,5 @@
-// Copyright (c) Liam Stanley <me@liamstanley.io>. All rights reserved. Use
-// of this source code is governed by the MIT license that can be found in
+// Copyright (c) Liam Stanley <liam@liam.sh>. All rights reserved. Use of
+// this source code is governed by the MIT license that can be found in
 // the LICENSE file.
 
 package pt
@@ -7,6 +7,7 @@ package pt
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/fs"
@@ -114,7 +115,9 @@ func (ld *Loader) Render(w http.ResponseWriter, r *http.Request, path string, rc
 		atmpl, err = ld.fs.FromFile(path)
 	}
 
-	if orig, ok := err.(*pongo2.Error); ok {
+	var orig *pongo2.Error
+
+	if errors.As(err, &orig) {
 		if os.IsNotExist(orig.OrigError) {
 			if ld.conf.NotFoundHandler != nil {
 				ld.conf.NotFoundHandler(w, r)
@@ -152,8 +155,12 @@ func (ld *Loader) Render(w http.ResponseWriter, r *http.Request, path string, rc
 	}
 
 	w.Header().Set("Content-Type", "text/html")
-	if err := tpl.ExecuteWriter(ctx, w); err != nil {
-		if _, ok := err.(*pongo2.Error); ok {
+
+	err = tpl.ExecuteWriter(ctx, w)
+	if err != nil {
+		var pongoErr *pongo2.Error
+
+		if errors.As(err, &pongoErr) {
 			panic(err)
 		}
 
@@ -182,7 +189,7 @@ func FileServer(router Router, path string, root http.FileSystem) {
 	srv := http.StripPrefix(path, http.FileServer(root))
 
 	if path != "/" && path[len(path)-1] != '/' {
-		router.Get(path, http.RedirectHandler(path+"/", 301).ServeHTTP)
+		router.Get(path, http.RedirectHandler(path+"/", http.StatusMovedPermanently).ServeHTTP)
 		path += "/"
 	}
 	path += "*"

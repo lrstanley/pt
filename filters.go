@@ -1,5 +1,5 @@
-// Copyright (c) Liam Stanley <me@liamstanley.io>. All rights reserved. Use
-// of this source code is governed by the MIT license that can be found in
+// Copyright (c) Liam Stanley <liam@liam.sh>. All rights reserved. Use of
+// this source code is governed by the MIT license that can be found in
 // the LICENSE file.
 
 package pt
@@ -12,8 +12,11 @@ import (
 	"github.com/flosch/pongo2/v6"
 )
 
-func init() {
-	pongo2.RegisterFilter("json", filterJSON)
+func init() { //nolint:gochecknoinits
+	err := pongo2.RegisterFilter("json", filterJSON)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func filterJSON(in, param *pongo2.Value) (*pongo2.Value, *pongo2.Error) {
