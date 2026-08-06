@@ -1,5 +1,6 @@
 <!-- template:begin:header -->
 <!-- do not edit anything in this "template" block, its auto-generated -->
+
 <p align="center">pt -- pt is a helper package for using pongo2 & in-memory tmpl loaders together.</p>
 <p align="center">
   <a href="https://github.com/lrstanley/pt/tags">
@@ -10,8 +11,9 @@
   </a>
 
   <a href="https://github.com/lrstanley/pt/actions?query=workflow%3Atest+event%3Apush">
-    <img title="GitHub Workflow Status (test @ master)" src="https://img.shields.io/github/workflow/status/lrstanley/pt/test/master?label=test&style=flat-square&event=push">
+    <img title="GitHub Workflow Status (test @ master)" src="https://img.shields.io/github/actions/workflow/status/lrstanley/pt/test.yml?branch=master&label=test&style=flat-square">
   </a>
+
 
   <a href="https://codecov.io/gh/lrstanley/pt">
     <img title="Code Coverage" src="https://img.shields.io/codecov/c/github/lrstanley/pt/master?style=flat-square">
@@ -58,7 +60,7 @@ template loaders together.
 <!-- template:begin:goget -->
 <!-- do not edit anything in this "template" block, its auto-generated -->
 ```console
-$ go get -u github.com/lrstanley/pt@latest
+go get -u github.com/lrstanley/pt@latest
 ```
 <!-- template:end:goget -->
 
@@ -66,24 +68,24 @@ $ go get -u github.com/lrstanley/pt@latest
 <!-- do not edit anything in this "template" block, its auto-generated -->
 ## :raising_hand_man: Support & Assistance
 
-   * :heart: Please review the [Code of Conduct](.github/CODE_OF_CONDUCT.md) for
+* :heart: Please review the [Code of Conduct](.github/CODE_OF_CONDUCT.md) for
      guidelines on ensuring everyone has the best experience interacting with
      the community.
-   * :raising_hand_man: Take a look at the [support](.github/SUPPORT.md) document on
+* :raising_hand_man: Take a look at the [support](.github/SUPPORT.md) document on
      guidelines for tips on how to ask the right questions.
-   * :lady_beetle: For all features/bugs/issues/questions/etc, [head over here](https://github.com/lrstanley/pt/issues/new/choose).
+* :lady_beetle: For all features/bugs/issues/questions/etc, [head over here](https://github.com/lrstanley/pt/issues/new/choose).
 <!-- template:end:support -->
 
 <!-- template:begin:contributing -->
 <!-- do not edit anything in this "template" block, its auto-generated -->
 ## :handshake: Contributing
 
-   * :heart: Please review the [Code of Conduct](.github/CODE_OF_CONDUCT.md) for guidelines
+* :heart: Please review the [Code of Conduct](.github/CODE_OF_CONDUCT.md) for guidelines
      on ensuring everyone has the best experience interacting with the
-	   community.
-   * :clipboard: Please review the [contributing](.github/CONTRIBUTING.md) doc for submitting
+    community.
+* :clipboard: Please review the [contributing](.github/CONTRIBUTING.md) doc for submitting
      issues/a guide on submitting pull requests and helping out.
-   * :old_key: For anything security related, please review this repositories [security policy](https://github.com/lrstanley/pt/security/policy).
+* :old_key: For anything security related, please review this repositories [security policy](https://github.com/lrstanley/pt/security/policy).
 <!-- template:end:contributing -->
 
 <!-- template:begin:license -->
@@ -93,7 +95,7 @@ $ go get -u github.com/lrstanley/pt@latest
 ```
 MIT License
 
-Copyright (c) 2017 Liam Stanley <me@liamstanley.io>
+Copyright (c) 2017 Liam Stanley <liam@liam.sh>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
